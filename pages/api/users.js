@@ -2,13 +2,13 @@ const MongoClient = require('mongodb').MongoClient;
 const bcrypt = require('bcrypt');
 const v4 = require('uuid').v4;
 const jwt = require('jsonwebtoken');
-const jwtSecret = process.env.JWT_SECRET;
-
 const saltRounds = 10;
-const url = 'mongodb://localhost:27017';
-const dbName = 'simple-app';
 
-const client = new MongoClient(url, {
+const jwtSecret = process.env.JWT_SECRET;
+const mongoUrl = process.env.MONGO_URL;
+const dbName = process.env.DB_NAME;
+
+const client = new MongoClient(mongoUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
