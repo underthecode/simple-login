@@ -14,8 +14,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.2",
     "next": "9.5.5",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
     "swr": "^0.3.6",
     "unfetch": "^4.2.0",
     "uuid": "^8.3.1"
