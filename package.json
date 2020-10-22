@@ -8,14 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "@castleio/sdk": "^0.4.7",
     "bcrypt": "^5.0.0",
     "isomorphic-unfetch": "^3.1.0",
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.2",
     "next": "9.5.5",
-    "react": "17.0.0",
-    "react-dom": "17.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
     "swr": "^0.3.6",
     "unfetch": "^4.2.0",
     "uuid": "^8.3.1"
