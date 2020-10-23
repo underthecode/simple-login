@@ -1,10 +1,12 @@
 const MongoClient = require('mongodb').MongoClient;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { Castle, EVENTS } = require('@castleio/sdk');
 
 const jwtSecret = process.env.JWT_SECRET;
 const mongoUrl = process.env.MONGO_URL;
 const dbName = process.env.DB_NAME;
+const castle = new Castle({ apiSecret: process.env.CASTLE_API_SECRET });
 
 const client = new MongoClient(mongoUrl, {
   useNewUrlParser: true,
@@ -57,6 +59,19 @@ export default (req, res) => {
                       expiresIn: 3000
                     }
                   );
+                  const response = castle.authenticate({
+                    event: EVENTS.LOGIN_SUCCEEDED,
+                    user_id: user.userId,
+                    user_traits: {
+                      email: user.email
+                    },
+                    context: {
+                      ip: '127.0.0.1',
+                      client_id: token,
+                      headers: req.headers
+                    }
+                  });
+                  console.log(response);
                   res.status(200).json({ token });
                   return;
                 } else {
