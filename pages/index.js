@@ -38,7 +38,7 @@ const Home = () => {
         <>
           <Link href='/login'>Login</Link>
           <p>or</p>
-          <Link href='/signup'>Sign Up</Link>
+          <Link href='/register'>Register</Link>
         </>
       )}
     </div>
