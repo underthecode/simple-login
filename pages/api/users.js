@@ -14,12 +14,12 @@ const client = new MongoClient(mongoUrl, {
 });
 
 const findUser = (db, email, callback) => {
-  const collection = db.collection('user');
+  const collection = db.collection('users');
   collection.findOne({ email }, callback);
 };
 
 const createUser = (db, email, password, callback) => {
-  const collection = db.collection('user');
+  const collection = db.collection('users');
   bcrypt.hash(password, saltRounds, (err, hash) => {
     collection.insertOne(
       {
