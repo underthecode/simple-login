@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
-
 import cookie from 'js-cookie';
 
-const Login = () => {
-  const [loginError, setLoginError] = useState('');
+const Register = () => {
+  const [registerError, setRegisterError] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('/api/auth', {
+    fetch('/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -21,12 +20,10 @@ const Login = () => {
         password
       })
     })
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         if (data && data.error) {
-          setLoginError(data.message);
+          setRegisterError(data.message);
         }
         if (data && data.token) {
           cookie.set('token', data.token, { expires: 2 });
@@ -37,28 +34,40 @@ const Login = () => {
   return (
     <div>
       <Head>
-        <title>Login</title>
+        <title>Register</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <input
-          name='email'
-          type='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          name='password'
-          type='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <h2>Register</h2>
+        <label htmlFor='email'>
+          email
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            name='email'
+            type='email'
+          />
+        </label>
+
+        <br />
+
+        <label htmlFor='password'>
+          password
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            name='password'
+            type='password'
+          />
+        </label>
+
+        <br />
+
         <input type='submit' value='Submit' />
-        {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
+        {registerError && <p style={{ color: 'red' }}>{registerError}</p>}
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;
