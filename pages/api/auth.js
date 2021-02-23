@@ -14,7 +14,7 @@ const client = new MongoClient(mongoUrl, {
 });
 
 const findUser = (db, email, callback) => {
-  const collection = db.collection('user');
+  const collection = db.collection('users');
   collection.findOne({ email }, callback);
 };
 
@@ -63,11 +63,12 @@ export default (req, res) => {
                     event: EVENTS.LOGIN_SUCCEEDED,
                     user_id: user.userId,
                     user_traits: {
-                      email: user.email
+                      email: user.email,
+                      registered_at: '2021-02-21T00:00:00.000Z'
                     },
                     context: {
-                      ip: '127.0.0.1',
                       client_id: token,
+                      ip: '248.186.33.141',
                       headers: req.headers
                     }
                   });
